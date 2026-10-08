@@ -1,17 +1,34 @@
-# Study_Planner
 <div align="center">
 
-# 📚 Study Planner
+<img src="assets/planner-preview.png" alt="Study Planner" width="900">
 
-### A modern desktop study planning application
+<br><br>
 
-<img src="assets/planner-preview.png" alt="Study Planner Preview" width="850">
+# STUDY PLANNER
+
+### Modern desktop study planning application
 
 <br>
 
-**Plan smarter · Study better · Stay organized**
+<a href="#english">
+  <img src="https://img.shields.io/badge/ENGLISH-111111?style=for-the-badge">
+</a>
+&nbsp;
+<a href="#فارسی">
+  <img src="https://img.shields.io/badge/فارسی-111111?style=for-the-badge">
+</a>
 
-[English](#english) · [فارسی](#فارسی)
+<br><br>
+
+<img src="https://img.shields.io/badge/Python-3.12-111111?style=flat-square&logo=python&logoColor=white">
+<img src="https://img.shields.io/badge/HTML5-111111?style=flat-square&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/CSS3-111111?style=flat-square&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/JavaScript-111111?style=flat-square&logo=javascript&logoColor=white">
+<img src="https://img.shields.io/badge/pywebview-111111?style=flat-square">
+
+<br><br>
+
+> **Plan smarter. Study better. Stay organized.**
 
 </div>
 
@@ -21,40 +38,134 @@
 
 # 🇬🇧 English
 
-## About
+<div align="center">
 
-**Study Planner** is a modern desktop application designed to help students organize their study schedule, manage tasks, and keep track of their academic plans in one place.
+## ✦ About the Project
 
-The application combines a clean interface with a web-based UI running as a desktop application through **pywebview**.
+</div>
 
----
+**Study Planner** is a modern desktop application built to make study planning and academic task management easier.
 
-## ✨ Features
+The application combines a web-based interface with a native desktop environment using **Python and pywebview**, providing a clean and focused experience without requiring a traditional browser window.
 
-* 📅 Study planning and scheduling
-* ✅ Task and study-session management
-* 📊 Organized academic workflow
-* 🖥️ Desktop application interface
-* 🌐 HTML & CSS based interface
-* ⚡ Lightweight and fast
-* 📦 Standalone Windows executable
-* 🎨 Custom application branding
-* 🔒 Local application architecture
-* 🧩 Modular project structure
-
----
-
-## 🛠️ Technologies
+<br>
 
 <div align="center">
 
-<img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white">
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
-<img src="https://img.shields.io/badge/pywebview-Desktop-444444?style=for-the-badge">
+|    📅 Planning    |       ✅ Tasks      |      📊 Organization      |
+| :---------------: | :----------------: | :-----------------------: |
+| Build study plans | Manage study tasks | Keep everything organized |
 
 </div>
+
+---
+
+## ⚡ Features
+
+<table>
+<tr>
+<td width="50%">
+
+### 📅 Study Planning
+
+Create and organize your study schedule in one place.
+
+</td>
+<td width="50%">
+
+### ✅ Task Management
+
+Keep track of academic tasks and study sessions.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+### 🖥️ Desktop Experience
+
+Runs as a dedicated Windows application using pywebview.
+
+</td>
+<td>
+
+### ⚡ Lightweight
+
+Designed to provide a simple and focused experience.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+### 📦 Standalone Build
+
+Can be compiled into a standalone Windows application using Nuitka.
+
+</td>
+<td>
+
+### 🎨 Custom UI
+
+Custom interface and application branding.
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🧠 Tech Stack
+
+<div align="center">
+
+| Technology     | Purpose                   |
+| :------------- | :------------------------ |
+| **Python**     | Application logic         |
+| **HTML**       | User interface structure  |
+| **CSS**        | Interface styling         |
+| **JavaScript** | Front-end interactions    |
+| **pywebview**  | Desktop application layer |
+| **Nuitka**     | Windows executable build  |
+| **Inno Setup** | Windows installer         |
+
+</div>
+
+---
+
+## 🏗️ Architecture
+
+```text
+                    ┌─────────────────────┐
+                    │    Study Planner    │
+                    └──────────┬──────────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │      Python         │
+                    │   Application Core  │
+                    └──────────┬──────────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │      pywebview      │
+                    │    Desktop Layer    │
+                    └──────────┬──────────┘
+                               │
+              ┌────────────────▼────────────────┐
+              │                                 │
+        ┌─────▼─────┐                    ┌──────▼─────┐
+        │    HTML   │                    │     CSS    │
+        │     UI    │                    │   Styling  │
+        └─────┬─────┘                    └──────┬─────┘
+              │                                 │
+              └────────────────┬────────────────┘
+                               │
+                        ┌──────▼──────┐
+                        │ JavaScript  │
+                        │ Interaction │
+                        └─────────────┘
+```
 
 ---
 
@@ -78,31 +189,31 @@ study_planner/
 │   └── build_exe.py
 │
 ├── build/
-│   └── ...
 │
 ├── run.py
 ├── Planner.iss
+├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## 🚀 Run the Project
+## 🚀 Getting Started
 
-Clone the repository:
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
 cd study_planner
 ```
 
-Install the required dependencies:
+### 2. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the application:
+### 3. Run
 
 ```bash
 python run.py
@@ -110,39 +221,33 @@ python run.py
 
 ---
 
-## 📦 Build Windows Application
+## 📦 Build for Windows
 
-The project uses **Nuitka** to create a standalone Windows application.
+The project uses **Nuitka** to create a standalone Windows build.
 
 ```bash
 python tools/build_exe.py
 ```
 
-The compiled application will be generated inside:
+The generated application will be located at:
 
 ```text
-build/run.dist/
-```
-
-The main executable is:
-
-```text
-Planner.exe
+build/run.dist/Planner.exe
 ```
 
 ---
 
 ## 🧰 Create Installer
 
-The Windows installer is created using **Inno Setup**.
-
-The installer configuration is located at:
+The Windows installer is configured with:
 
 ```text
 Planner.iss
 ```
 
-The final installer is generated inside:
+Open the file using **Inno Setup** and compile it.
+
+The resulting installer will be generated in:
 
 ```text
 installer/
@@ -154,23 +259,25 @@ installer/
 
 <div align="center">
 
-<img src="assets/planner-preview.png" alt="Planner Application" width="900">
+<img src="assets/planner-preview.png" alt="Study Planner Preview" width="850">
+
+<br><br>
+
+**Clean interface · Focused workflow · Desktop experience**
 
 </div>
 
 ---
 
-## 📌 Project Status
+## 📌 Status
 
-**Development**
+<div align="center">
 
-The project is actively being developed and improved.
+### 🟡 In Development
 
----
+Study Planner is an ongoing project and new features and improvements are being added over time.
 
-## 👨‍💻 Developer
-
-Built with Python, HTML, CSS and JavaScript.
+</div>
 
 ---
 
@@ -178,40 +285,136 @@ Built with Python, HTML, CSS and JavaScript.
 
 # 🇮🇷 فارسی
 
-## درباره پروژه
+<div align="center">
 
-**Study Planner** یک برنامه دسکتاپ مدرن برای برنامه‌ریزی و مدیریت مطالعه است که با هدف ساده‌تر کردن مدیریت برنامه‌های درسی، وظایف و جلسات مطالعه ساخته شده است.
+## ✦ درباره پروژه
 
-رابط کاربری پروژه با استفاده از **HTML و CSS** طراحی شده و به کمک **pywebview** به صورت یک برنامه دسکتاپ اجرا می‌شود.
+</div>
 
----
+**Study Planner** یک برنامه دسکتاپ مدرن برای برنامه‌ریزی مطالعه و مدیریت وظایف درسی است.
 
-## ✨ امکانات
+این پروژه با ترکیب **Python، HTML، CSS، JavaScript و pywebview** یک رابط کاربری وب را در قالب یک برنامه دسکتاپ ویندوزی اجرا می‌کند.
 
-* 📅 برنامه‌ریزی مطالعه
-* ✅ مدیریت وظایف و جلسات مطالعه
-* 📊 مدیریت منظم برنامه‌های درسی
-* 🖥️ رابط کاربری دسکتاپ
-* 🌐 رابط ساخته‌شده با HTML و CSS
-* ⚡ سبک و سریع
-* 📦 قابلیت ساخت فایل اجرایی مستقل برای ویندوز
-* 🎨 لوگو و هویت بصری اختصاصی
-* 🔒 معماری محلی برنامه
-* 🧩 ساختار ماژولار پروژه
+هدف اصلی پروژه ایجاد یک محیط ساده، مرتب و متمرکز برای مدیریت برنامه مطالعه است.
 
----
-
-## 🛠️ تکنولوژی‌های استفاده‌شده
+<br>
 
 <div align="center">
 
-<img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white">
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
-<img src="https://img.shields.io/badge/pywebview-Desktop-444444?style=for-the-badge">
+|   📅 برنامه‌ریزی   |    ✅ وظایف   |    📊 سازمان‌دهی    |
+| :----------------: | :----------: | :-----------------: |
+| ساخت برنامه مطالعه | مدیریت وظایف | مرتب‌سازی فعالیت‌ها |
 
 </div>
+
+---
+
+## ⚡ امکانات
+
+<table>
+<tr>
+<td width="50%">
+
+### 📅 برنامه‌ریزی مطالعه
+
+برنامه‌های مطالعه خود را در یک محیط منظم مدیریت کنید.
+
+</td>
+<td width="50%">
+
+### ✅ مدیریت وظایف
+
+وظایف درسی و جلسات مطالعه را مدیریت کنید.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+### 🖥️ تجربه دسکتاپ
+
+برنامه به صورت یک اپلیکیشن اختصاصی ویندوزی اجرا می‌شود.
+
+</td>
+<td>
+
+### ⚡ سبک و سریع
+
+تمرکز پروژه روی یک تجربه ساده و کاربردی است.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+### 📦 نسخه مستقل
+
+امکان ساخت نسخه مستقل Windows با استفاده از Nuitka وجود دارد.
+
+</td>
+<td>
+
+### 🎨 رابط اختصاصی
+
+رابط کاربری و هویت بصری اختصاصی برای برنامه طراحی شده است.
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🧠 تکنولوژی‌ها
+
+<div align="center">
+
+| تکنولوژی       | کاربرد                    |
+| :------------- | :------------------------ |
+| **Python**     | منطق اصلی برنامه          |
+| **HTML**       | ساختار رابط کاربری        |
+| **CSS**        | طراحی و ظاهر رابط         |
+| **JavaScript** | تعاملات رابط کاربری       |
+| **pywebview**  | اجرای رابط در محیط دسکتاپ |
+| **Nuitka**     | ساخت فایل اجرایی ویندوز   |
+| **Inno Setup** | ساخت Installer            |
+
+</div>
+
+---
+
+## 🏗️ معماری پروژه
+
+```text
+                    ┌─────────────────────┐
+                    │    Study Planner    │
+                    └──────────┬──────────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │       Python        │
+                    │    هسته برنامه     │
+                    └──────────┬──────────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │      pywebview      │
+                    │    لایه دسکتاپ      │
+                    └──────────┬──────────┘
+                               │
+              ┌────────────────▼────────────────┐
+              │                                 │
+        ┌─────▼─────┐                    ┌──────▼─────┐
+        │    HTML   │                    │     CSS    │
+        │    رابط   │                    │    ظاهر    │
+        └─────┬─────┘                    └──────┬─────┘
+              │                                 │
+              └────────────────┬────────────────┘
+                               │
+                        ┌──────▼──────┐
+                        │ JavaScript  │
+                        │ تعاملات     │
+                        └─────────────┘
+```
 
 ---
 
@@ -235,10 +438,10 @@ study_planner/
 │   └── build_exe.py
 │
 ├── build/
-│   └── ...
 │
 ├── run.py
 ├── Planner.iss
+├── requirements.txt
 └── README.md
 ```
 
@@ -246,20 +449,20 @@ study_planner/
 
 ## 🚀 اجرای پروژه
 
-ابتدا Repository را دریافت کنید:
+### ۱. دریافت پروژه
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
 cd study_planner
 ```
 
-سپس وابستگی‌ها را نصب کنید:
+### ۲. نصب وابستگی‌ها
 
 ```bash
 pip install -r requirements.txt
 ```
 
-اجرای برنامه:
+### ۳. اجرای برنامه
 
 ```bash
 python run.py
@@ -275,31 +478,25 @@ python run.py
 python tools/build_exe.py
 ```
 
-فایل‌های خروجی در مسیر زیر قرار می‌گیرند:
+فایل اصلی برنامه در این مسیر قرار می‌گیرد:
 
 ```text
-build/run.dist/
-```
-
-فایل اصلی برنامه:
-
-```text
-Planner.exe
+build/run.dist/Planner.exe
 ```
 
 ---
 
 ## 🧰 ساخت Installer
 
-برای ساخت Installer ویندوز از **Inno Setup** استفاده شده است.
-
-فایل تنظیمات Installer:
+تنظیمات Installer در فایل زیر قرار دارد:
 
 ```text
 Planner.iss
 ```
 
-خروجی نهایی Installer در پوشه زیر قرار می‌گیرد:
+فایل را با **Inno Setup** باز کرده و Compile کنید.
+
+خروجی Installer در مسیر زیر قرار می‌گیرد:
 
 ```text
 installer/
@@ -311,7 +508,11 @@ installer/
 
 <div align="center">
 
-<img src="assets/planner-preview.png" alt="تصویر برنامه Study Planner" width="900">
+<img src="assets/planner-preview.png" alt="تصویر Study Planner" width="850">
+
+<br><br>
+
+**رابط تمیز · workflow متمرکز · تجربه دسکتاپ**
 
 </div>
 
@@ -319,22 +520,26 @@ installer/
 
 ## 📌 وضعیت پروژه
 
-**در حال توسعه**
+<div align="center">
 
-این پروژه همچنان در حال توسعه و بهبود است.
+### 🟡 در حال توسعه
 
----
+پروژه Study Planner همچنان در حال توسعه است و امکانات و بهبودهای جدید به آن اضافه می‌شوند.
 
-## 👨‍💻 توسعه‌دهنده
-
-ساخته‌شده با Python، HTML، CSS و JavaScript.
+</div>
 
 ---
 
 <div align="center">
 
-### Study Planner
+<br>
 
-**Plan smarter. Study better.**
+# STUDY PLANNER
+
+### Plan smarter. Study better.
+
+<br>
+
+**Made with Python**
 
 </div>
