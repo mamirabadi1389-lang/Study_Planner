@@ -1,0 +1,20 @@
+/* ---- sidebar logo ---- */
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo img { width: 36px; height: 36px; object-fit: contain; }
+
+/* ---- bottom mark (visible on every page) ---- */
+.brand-mark {
+    position: fixed;
+    bottom: 14px;
+    left: 20px;          /* change to "right: 20px" to move it to the other side */
+    height: 42px;
+    width: auto;
+    opacity: 0.9;
+    z-index: 40;
+    transition: 0.25s;
+}
+.brand-mark:hover { opacity: 1; transform: scale(1.06); }
+
+/* keep content clear of the mark; move toasts to the bottom centre */
+.layout { padding-bottom: 84px; }
+#toast-host { left: 50%; transform: translateX(-50%); }

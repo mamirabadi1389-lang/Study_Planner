@@ -1,0 +1,211 @@
+/* ================= app reveal after the splash ================= */
+.layout { transition: opacity 0.8s ease, transform 0.8s ease; }
+body.booting .layout {
+    opacity: 0;
+    transform: scale(0.985);
+    animation: bootSafe 0s 20s forwards;   /* failsafe if splash.js ever fails */
+}
+@keyframes bootSafe { to { opacity: 1; transform: none; } }
+
+/* ================= splash shell ================= */
+#splash {
+    position: fixed; inset: 0; z-index: 9999;
+    display: grid; place-items: center; overflow: hidden;
+    direction: ltr; background: #04050a; color: #e8f1ff;
+    font-family: "Consolas", "Courier New", monospace;
+    transition: opacity 0.65s ease, transform 0.65s ease, filter 0.65s ease;
+}
+#splash.out {
+    opacity: 0; transform: scale(1.08); filter: blur(8px);
+    pointer-events: none;
+}
+
+.sp-bg {
+    position: absolute; inset: 0; opacity: 0;
+    animation: spFade 1.2s 0.1s ease forwards;
+    background:
+        radial-gradient(ellipse at 50% 45%, rgba(var(--accent-rgb), 0.24), transparent 62%),
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 4px);
+}
+.sp-vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.8));
+}
+.sp-scan {
+    position: absolute; left: 0; right: 0; top: -160px; height: 160px;
+    background: linear-gradient(transparent, rgba(255, 255, 255, 0.06), transparent);
+    animation: spScan 3.4s linear infinite;
+}
+.sp-frame {
+    position: absolute; inset: 26px; opacity: 0;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    animation: spFade 1s 0.6s ease forwards;
+}
+.sp-label {
+    position: absolute; font-size: 0.68rem; letter-spacing: 0.3em;
+    color: rgba(232, 241, 255, 0.4);
+}
+.sp-tl { top: 12px; left: 14px; }
+.sp-br { bottom: 12px; right: 14px; }
+
+.sp-stage {
+    position: relative; z-index: 1;
+    display: grid; justify-items: center; gap: 38px;
+    width: min(560px, 86vw);
+}
+
+/* ================= the mark ================= */
+.sp-mark { position: relative; width: fit-content; }
+.sp-mark img {
+    display: block; height: clamp(110px, 22vh, 190px); width: auto;
+    opacity: 0;
+}
+.sp-mark.on img { animation: spMark 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.sp-mark.idle img { opacity: 1; animation: spPulse 2.4s ease-in-out infinite; }
+
+.sp-streak {
+    position: absolute; left: 50%; top: 50%; height: 2px; width: 0;
+    transform: translate(-50%, -50%); background: #fff; opacity: 0;
+    box-shadow: 0 0 22px 6px var(--accent), 0 0 60px 14px rgba(var(--accent-rgb), 0.5);
+}
+.sp-mark.on .sp-streak { animation: spStreak 0.7s ease-out forwards; }
+
+.sp-flare {
+    position: absolute; left: 50%; top: 50%; width: 170%; height: 170%;
+    transform: translate(-50%, -50%) scale(0.2); opacity: 0; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(var(--accent-rgb), 0.6), transparent);
+}
+.sp-mark.on .sp-flare { animation: spFlare 1.5s 0.25s ease-out forwards; }
+
+.sp-sweep {
+    position: absolute; inset: 0; pointer-events: none;
+    -webkit-mask: var(--mark) center / contain no-repeat;
+            mask: var(--mark) center / contain no-repeat;
+    background: linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, 0.95) 50%, transparent 60%);
+    background-size: 300% 100%; background-position: 100% 0;
+}
+.sp-mark.on .sp-sweep { animation: spSweep 0.9s 0.7s ease-in-out forwards; }
+
+/* ================= title box ================= */
+.sp-box {
+    position: relative; padding: 14px 36px; min-width: min(390px, 80vw);
+    text-align: center; white-space: nowrap; font-weight: 700;
+    font-size: 1.05rem; letter-spacing: 0.42em; text-indent: 0.42em;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.045);
+    text-shadow: 0 0 14px rgba(var(--accent-rgb), 0.9);
+    transform: scaleX(0); opacity: 0;
+}
+.sp-box.on { animation: spBox 0.4s cubic-bezier(0.2, 0.9, 0.2, 1) forwards; }
+.sp-box .c { position: absolute; width: 12px; height: 12px; border: 2px solid var(--accent-2); }
+.sp-box .tl { top: -5px; left: -5px; border-right: 0; border-bottom: 0; }
+.sp-box .tr { top: -5px; right: -5px; border-left: 0; border-bottom: 0; }
+.sp-box .bl { bottom: -5px; left: -5px; border-right: 0; border-top: 0; }
+.sp-box .br { bottom: -5px; right: -5px; border-left: 0; border-top: 0; }
+.sp-caret {
+    display: inline-block; width: 0.55em; height: 1.1em; margin-left: 0.15em;
+    vertical-align: -0.18em; background: var(--accent-2);
+    animation: spBlink 0.7s steps(1) infinite;
+}
+.sp-caret.off { display: none; }
+
+/* ================= loading line ================= */
+.sp-load { width: 100%; opacity: 0; transition: opacity 0.4s; }
+.sp-load.on { opacity: 1; }
+.sp-track {
+    position: relative; height: 4px; background: rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.3s;
+}
+.sp-track::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 8px; height: 5px;
+    background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0 1px, transparent 1px 20px);
+}
+.sp-track span {
+    position: relative; display: block; height: 100%; width: 0;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    box-shadow: 0 0 16px var(--accent-2);
+}
+.sp-track span::after {
+    content: ""; position: absolute; right: -4px; top: -3px; width: 10px; height: 10px;
+    border-radius: 50%; background: #fff; box-shadow: 0 0 14px 4px var(--accent-2);
+}
+.sp-track.done { box-shadow: 0 0 40px 8px var(--accent-2); }
+.sp-track.done span { background: #fff; }
+.sp-meta {
+    display: flex; justify-content: space-between; margin-top: 22px;
+    font-size: 0.72rem; letter-spacing: 0.3em; color: rgba(232, 241, 255, 0.55);
+}
+
+/* ================= keyframes ================= */
+@keyframes spFade { to { opacity: 1; } }
+@keyframes spScan { to { transform: translateY(calc(100vh + 320px)); } }
+@keyframes spBlink { 50% { opacity: 0; } }
+@keyframes spBox {
+    0% { transform: scaleX(0); opacity: 0; }
+    30% { opacity: 1; }
+    100% { transform: scaleX(1); opacity: 1; }
+}
+@keyframes spStreak {
+    0% { width: 0; opacity: 1; }
+    55% { width: min(86vw, 720px); opacity: 1; }
+    100% { width: min(86vw, 720px); opacity: 0; }
+}
+@keyframes spFlare {
+    0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+    35% { opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1.25); opacity: 0.25; }
+}
+@keyframes spSweep { to { background-position: 0 0; } }
+@keyframes spPulse {
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.35)); }
+    50% { filter: drop-shadow(0 0 26px rgba(var(--accent-rgb), 0.9)); }
+}
+@keyframes spMark {
+    0% {
+        opacity: 0; transform: scale(1.9); clip-path: inset(0 0 0 0);
+        filter: blur(22px) brightness(4)
+                drop-shadow(-18px 0 0 rgba(255, 0, 60, 0.9))
+                drop-shadow(18px 0 0 rgba(0, 225, 255, 0.9));
+    }
+    18% { opacity: 1; }
+    26% {
+        opacity: 0.25; transform: scale(1.25) translateX(-10px);
+        clip-path: inset(0 0 55% 0);
+        filter: blur(3px) brightness(2.5)
+                drop-shadow(-12px 0 0 rgba(255, 0, 60, 0.9))
+                drop-shadow(12px 0 0 rgba(0, 225, 255, 0.9));
+    }
+    32% {
+        opacity: 1; transform: scale(1.18) translateX(12px);
+        clip-path: inset(45% 0 0 0);
+        filter: blur(2px) brightness(2)
+                drop-shadow(-9px 0 0 rgba(255, 0, 60, 0.9))
+                drop-shadow(9px 0 0 rgba(0, 225, 255, 0.9));
+    }
+    40% {
+        opacity: 0.4; transform: scale(1.12) translateX(-4px);
+        clip-path: inset(0 0 0 0);
+        filter: blur(1px) brightness(1.8)
+                drop-shadow(-6px 0 0 rgba(255, 0, 60, 0.9))
+                drop-shadow(6px 0 0 rgba(0, 225, 255, 0.9));
+    }
+    48% {
+        opacity: 1; transform: scale(1.08);
+        clip-path: inset(20% 0 30% 0);
+        filter: blur(0) brightness(1.6)
+                drop-shadow(-7px 0 0 rgba(255, 0, 60, 0.9))
+                drop-shadow(7px 0 0 rgba(0, 225, 255, 0.9));
+    }
+    70% {
+        opacity: 1; transform: scale(1.03); clip-path: inset(0 0 0 0);
+        filter: blur(0) brightness(1.4)
+                drop-shadow(-4px 0 0 rgba(255, 0, 60, 0.8))
+                drop-shadow(4px 0 0 rgba(0, 225, 255, 0.8));
+    }
+    100% {
+        opacity: 1; transform: scale(1); clip-path: inset(0 0 0 0);
+        filter: blur(0) brightness(1)
+                drop-shadow(0 0 0 rgba(255, 0, 60, 0))
+                drop-shadow(0 0 0 rgba(0, 225, 255, 0));
+    }
+}

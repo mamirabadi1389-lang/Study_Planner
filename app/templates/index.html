@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="layout">
+
+    <aside class="sidebar glass">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='img/logo.ico') }}" alt="" onerror="this.remove()">
+            <span>پلنر</span>
+        </div>
+        <nav>
+            <a class="nav-item active" data-act="view" data-view="dashboard">🏠 داشبورد</a>
+            <a class="nav-item" data-act="view" data-view="week">📚 درس‌ها و برنامه هفتگی</a>
+            <a class="nav-item" data-act="view" data-view="tasks">✅ کارها و یادآورها</a>
+            <a class="nav-item" data-act="view" data-view="exams">📝 امتحان‌ها</a>
+            <a class="nav-item" data-act="view" data-view="grades">🎓 نمره‌ها و پیشرفت</a>
+            <a class="nav-item" data-act="view" data-view="stats">📊 آمار و دستاوردها</a>
+            <a class="nav-item" data-act="view" data-view="settings">⚙️ تنظیمات و تم</a>
+        </nav>
+        <div class="side-foot">
+            <button class="btn ghost" data-act="cycle-theme">🎨 تغییر سریع تم</button>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div>
+                <h1 id="greet">سلام، آماده‌ای؟</h1>
+                <p class="muted" id="greet-sub"></p>
+            </div>
+            <button class="btn" data-act="view" data-view="tasks"
+                    data-focus="task-title">＋ کار جدید</button>
+        </header>
+
+        <!-- ============ dashboard ============ -->
+        <section class="view active" id="view-dashboard">
+            <div class="hero">
+                <article class="card glass level-card">
+                    <div class="ring" id="ring">
+                        <div class="ring-inner">
+                            <span class="lvl" id="lvl">۱</span>
+                            <small>لول</small>
+                        </div>
+                    </div>
+                    <div class="grow">
+                        <h3>سطح پیشرفت</h3>
+                        <p class="muted" id="lvl-text"></p>
+                        <div class="bar"><span id="lvl-bar"></span></div>
+                        <span class="rank" id="rank"></span>
+                    </div>
+                </article>
+
+                <article class="card glass goal-card">
+                    <div class="ring ring-sm" id="goal-ring">
+                        <div class="ring-inner">
+                            <span class="lvl" id="goal-num">۰</span>
+                            <small id="goal-of"></small>
+                        </div>
+                    </div>
+                    <div class="grow">
+                        <h3>هدف امروز</h3>
+                        <p class="muted" id="goal-text"></p>
+                    </div>
+                </article>
+
+                <article class="card glass streak-card">
+                    <div class="flame">🔥</div>
+                    <div class="grow">
+                        <h3>استریک</h3>
+                        <div class="gpa" id="streak-now">۰<small>روز</small></div>
+                        <p class="muted" id="streak-best"></p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="grid">
+                <article class="card glass">
+                    <h3>کلاس‌های امروز</h3>
+                    <ul class="list" id="dash-classes"></ul>
+                </article>
+
+                <article class="card glass">
+                    <h3>کارهای امروز</h3>
+                    <ul class="list" id="dash-tasks"></ul>
+                </article>
+
+                <article class="card glass focus-card">
+                    <h3>تایمر تمرکز</h3>
+                    <div class="timer" id="timer">۲۵:۰۰</div>
+                    <div class="bar"><span id="timer-bar"></span></div>
+                    <div class="row timer-actions">
+                        <button class="btn" id="timer-btn" data-act="timer-toggle">شروع</button>
+                        <button class="btn ghost" data-act="timer-reset">ریست</button>
+                    </div>
+                    <p class="muted" id="focus-today"></p>
+                </article>
+
+                <article class="card glass">
+                    <h3>امتحان بعدی</h3>
+                    <div id="dash-exam"></div>
+                </article>
+
+                <article class="card glass">
+                    <h3>معدل</h3>
+                    <div class="gpa" id="dash-gpa">—</div>
+                    <div class="bar"><span id="dash-gpa-bar"></span></div>
+                </article>
+
+                <article class="card glass">
+                    <h3>یادآورهای پیش‌رو</h3>
+                    <ul class="list" id="dash-reminders"></ul>
+                </article>
+
+                <article class="card glass wide">
+                    <h3>کارهای انجام‌شده در ۷ روز اخیر</h3>
+                    <div id="chart-week-dash"></div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============ week ============ -->
+        <section class="view" id="view-week">
+            <div class="grid">
+                <article class="card glass">
+                    <h3>درس جدید</h3>
+                    <form id="course-form" class="form">
+                        <input name="name" placeholder="نام درس" required>
+                        <div class="row">
+                            <input name="color" type="color" value="#7c5cff" title="رنگ">
+                            <input name="credits" type="number" min="1" max="10"
+                                   value="1" title="تعداد واحد">
+                        </div>
+                        <button class="btn">افزودن درس</button>
+                    </form>
+                    <ul class="list" id="course-list"></ul>
+                </article>
+
+                <article class="card glass">
+                    <h3>افزودن به برنامه هفتگی</h3>
+                    <form id="slot-form" class="form">
+                        <select name="course_id" id="slot-course" required></select>
+                        <select name="weekday">
+                            <option value="0">شنبه</option>
+                            <option value="1">یکشنبه</option>
+                            <option value="2">دوشنبه</option>
+                            <option value="3">سه‌شنبه</option>
+                            <option value="4">چهارشنبه</option>
+                            <option value="5">پنجشنبه</option>
+                            <option value="6">جمعه</option>
+                        </select>
+                        <div class="row">
+                            <input name="start" type="time" required title="شروع">
+                            <input name="end" type="time" required title="پایان">
+                        </div>
+                        <button class="btn">افزودن به برنامه</button>
+                    </form>
+                </article>
+            </div>
+            <h3 class="section-title">برنامه این هفته</h3>
+            <div class="week-grid" id="week-grid"></div>
+        </section>
+
+        <!-- ============ tasks ============ -->
+        <section class="view" id="view-tasks">
+            <div class="grid">
+                <article class="card glass">
+                    <h3>کارهای روز</h3>
+                    <input type="date" id="task-day" class="date-input">
+                    <form id="task-form" class="form row-form">
+                        <input id="task-title" name="title" placeholder="کار جدید…" required>
+                        <select name="priority">
+                            <option value="1">بالا</option>
+                            <option value="2" selected>متوسط</option>
+                            <option value="3">کم</option>
+                        </select>
+                        <button class="btn">＋</button>
+                    </form>
+                    <ul class="list" id="task-list"></ul>
+                </article>
+
+                <article class="card glass">
+                    <h3>یادآورها</h3>
+                    <form id="reminder-form" class="form">
+                        <input name="title" placeholder="یادآور…" required>
+                        <input name="due_at" type="datetime-local" required>
+                        <button class="btn">افزودن یادآور</button>
+                    </form>
+                    <ul class="list" id="reminder-list"></ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============ exams ============ -->
+        <section class="view" id="view-exams">
+            <div class="grid">
+                <article class="card glass">
+                    <h3>امتحان جدید</h3>
+                    <form id="exam-form" class="form">
+                        <select name="course_id" id="exam-course" required></select>
+                        <input name="title" placeholder="عنوان (مثلاً میان‌ترم)" required>
+                        <div class="row">
+                            <input name="day" type="date" required>
+                            <input name="max_grade" type="number" min="1" value="20"
+                                   title="حداکثر نمره">
+                        </div>
+                        <button class="btn">ثبت امتحان</button>
+                    </form>
+                </article>
+            </div>
+            <h3 class="section-title">همه امتحان‌ها</h3>
+            <article class="card glass">
+                <ul class="list" id="exam-list"></ul>
+            </article>
+        </section>
+
+        <!-- ============ grades ============ -->
+        <section class="view" id="view-grades">
+            <div class="grid">
+                <article class="card glass">
+                    <h3>معدل کل (وزنی)</h3>
+                    <div class="gpa" id="grade-gpa">—</div>
+                </article>
+                <article class="card glass">
+                    <h3>مجموع امتیاز</h3>
+                    <div class="gpa" id="grade-xp">۰</div>
+                </article>
+                <article class="card glass wide">
+                    <h3>روند نمره‌ها (از ۲۰)</h3>
+                    <div id="chart-scores"></div>
+                </article>
+            </div>
+            <h3 class="section-title">میانگین هر درس</h3>
+            <article class="card glass">
+                <ul class="list" id="grade-courses"></ul>
+            </article>
+        </section>
+
+        <!-- ============ stats ============ -->
+        <section class="view" id="view-stats">
+            <div class="tiles">
+                <article class="card glass tile"><small class="muted">کار انجام‌شده</small><b id="t-done">۰</b></article>
+                <article class="card glass tile"><small class="muted">نرخ تکمیل</small><b id="t-rate">۰٪</b></article>
+                <article class="card glass tile"><small class="muted">مجموع تمرکز</small><b id="t-focus">۰</b></article>
+                <article class="card glass tile"><small class="muted">امتحان نمره‌دار</small><b id="t-exams">۰</b></article>
+            </div>
+            <div class="grid">
+                <article class="card glass">
+                    <h3>کارهای ۷ روز اخیر</h3>
+                    <div id="chart-week"></div>
+                </article>
+                <article class="card glass">
+                    <h3>دقیقه‌های تمرکز ۷ روز اخیر</h3>
+                    <div id="chart-focus"></div>
+                </article>
+                <article class="card glass">
+                    <h3>ساعت‌های هفتگی هر درس</h3>
+                    <div id="donut-hours"></div>
+                    <ul class="list" id="hours-legend"></ul>
+                </article>
+                <article class="card glass">
+                    <h3>نقشه فعالیت ۱۲ هفته اخیر</h3>
+                    <div id="heatmap"></div>
+                </article>
+                <article class="card glass wide">
+                    <h3>دستاوردها</h3>
+                    <div class="badges" id="badges"></div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============ settings ============ -->
+        <section class="view" id="view-settings">
+            <div class="grid">
+                <article class="card glass wide">
+                    <h3>تم برنامه</h3>
+                    <div class="themes" id="themes"></div>
+                </article>
+                <article class="card glass">
+                    <h3>پروفایل و هدف‌ها</h3>
+                    <form id="settings-form" class="form">
+                        <label class="muted">اسم (برای سلام داشبورد)</label>
+                        <input id="set-name" name="name" maxlength="30">
+                        <label class="muted">هدف روزانه (تعداد کار)</label>
+                        <input id="set-goal" name="daily_goal" type="number" min="1" max="50">
+                        <label class="muted">مدت هر جلسه تمرکز (دقیقه)</label>
+                        <input id="set-focus" name="focus_minutes" type="number" min="5" max="120">
+                        <button class="btn">ذخیره تنظیمات</button>
+                    </form>
+                </article>
+            </div>
+        </section>
+
+    </main>
+</div>
+{% endblock %}

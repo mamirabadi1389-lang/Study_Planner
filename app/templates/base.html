@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="{{ theme|default('neon') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}پلنر{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.ico') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/brand.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/splash.css') }}">
+</head>
+<body class="booting">
+
+    <!-- ============ startup splash ============ -->
+    <div id="splash" aria-hidden="true">
+        <div class="sp-bg"></div>
+        <div class="sp-scan"></div>
+        <div class="sp-vignette"></div>
+        <div class="sp-frame">
+            <span class="sp-label sp-tl">SYS // ONLINE</span>
+            <span class="sp-label sp-br">STUDY PLANNER · BUILD 1.0</span>
+        </div>
+
+        <div class="sp-stage">
+            <div class="sp-mark"
+                 style="--mark: url('{{ url_for('static', filename='img/mark.png') }}')">
+                <div class="sp-streak"></div>
+                <div class="sp-flare"></div>
+                <img src="{{ url_for('static', filename='img/mark.png') }}"
+                     alt="" onerror="this.remove()">
+                <div class="sp-sweep"></div>
+            </div>
+
+            <div class="sp-box">
+                <i class="c tl"></i><i class="c tr"></i>
+                <i class="c bl"></i><i class="c br"></i>
+                <span id="sp-text"></span><span class="sp-caret"></span>
+            </div>
+
+            <div class="sp-load">
+                <div class="sp-track"><span id="sp-fill"></span></div>
+                <div class="sp-meta">
+                    <span id="sp-status">INITIALIZING</span>
+                    <span id="sp-pct">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/splash.js') }}"></script>
+    <!-- ======================================== -->
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <linearGradient id="gBar" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" style="stop-color:var(--accent-2)"/>
+                <stop offset="1" style="stop-color:var(--accent)"/>
+            </linearGradient>
+            <linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" style="stop-color:var(--accent);stop-opacity:.45"/>
+                <stop offset="1" style="stop-color:var(--accent);stop-opacity:0"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <div class="bg-blob blob-a"></div>
+    <div class="bg-blob blob-b"></div>
+
+    {% block content %}{% endblock %}
+
+    <img class="brand-mark"
+         src="{{ url_for('static', filename='img/mark.png') }}"
+         alt="" onerror="this.remove()">
+
+    <div id="toast-host"></div>
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
